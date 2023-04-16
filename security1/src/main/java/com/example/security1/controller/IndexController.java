@@ -3,6 +3,8 @@ package com.example.security1.controller;
 import com.example.security1.model.User;
 import com.example.security1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,5 +78,17 @@ public class IndexController {
         userRepository.save(user);
 
         return "redirect:/loginForm";
+    }
+
+    @Secured("ROLE_ADMIN") // @PreAuthorize 보다 최근 나온 문법
+    @GetMapping("/info")
+    public @ResponseBody String info() {
+        return  "개인정보";
+    }
+
+    @PreAuthorize("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')") // 함수 실행 전에 실행된다.
+    @GetMapping("/data")
+    public @ResponseBody String data() {
+        return  "데이터정보";
     }
 }
