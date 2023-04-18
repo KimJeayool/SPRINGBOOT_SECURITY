@@ -22,6 +22,10 @@ public class User {
     private String email;
     private String role;
 
+
+    private String provider;    // Web 사이트 이름
+    private String providerId;  // Web 사이트 계정의 고유번호
+
     @CreationTimestamp
     private Timestamp createDate;
 
