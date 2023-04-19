@@ -14,9 +14,15 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
      * */
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        // registrationId 사용하여 어떤 사이트에서 왔는지 확인 가능 (ex google)
         System.out.println("getClientRegistration: " + userRequest.getClientRegistration());
+        // 해당 사이트의 Access Token
         System.out.println("getTokenValue: " + userRequest.getAccessToken().getTokenValue());
+        // userRequest 정보 -> loadUser() 호출 -> 회원 프로필 정보
         System.out.println("getAttributes: " + super.loadUser(userRequest).getAttributes());
+
+        OAuth2User oAuth2User = super.loadUser(userRequest);
+
 
         return super.loadUser(userRequest);
     }
