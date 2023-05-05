@@ -37,3 +37,9 @@ spring:
             scope:
               - email
               - profile
+          facebook:
+            client-id: # ID
+            client-secret: # Secret
+            scope:
+              - email
+              - public_profile
